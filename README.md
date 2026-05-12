@@ -36,7 +36,7 @@ I developed two distinct versions of the dashboard to demonstrate versatility in
 * **Features:** Interactive navigation buttons and Level of Detail (LOD) expressions for geographic trends.
 * **Focus:** Visual exploration of the 169 project categories.
 ![Tableau Overview](Dashboard%201.png)
-![Category Success Analysis](Percentage%20of%20Successful%20Projects%20by%20Category.png)
+![Tableau Overview](Percentage%20of%20Successful%20Projects%20by%20Category.png)
 
 ---
 
