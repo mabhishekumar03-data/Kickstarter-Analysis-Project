@@ -24,7 +24,7 @@ select  c.name as category_name ,
 p.category_id,count(ProjectID) as total_Count 
 from projects as p join category as c on p.category_id = c.id 
 group by category_name,p.category_id 
-order by total_sales desc;
+order by total_count desc;
 
 ## -- Total Number of Projects By Year, Quarter & Month --
 SELECT 
