@@ -18,9 +18,10 @@ select category_id ,count(*) as total_project_catgeory_wise
 from projects
 group by category_id
 order by total_project_catgeory_wise desc;
+
 # Total Number of Projects Based on Category_name
 select  c.name as category_name , 
-p.category_id,count(ProjectID) as total_sales 
+p.category_id,count(ProjectID) as total_Count 
 from projects as p join category as c on p.category_id = c.id 
 group by category_name,p.category_id 
 order by total_sales desc;
