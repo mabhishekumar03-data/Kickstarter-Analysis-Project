@@ -43,7 +43,19 @@ ORDER BY
     QUARTER(from_unixtime(created_at)), 
     MONTHNAME(from_unixtime(created_at)); 
 
+ # -- using joins to Connect calendar_table and Projects table
+     
+select C.Year as year_,
+C.Quarter as quarter_,
+C.Month_Name as month_ , 
+count((p.ProjectID))as total_count from calendar_table as c
+ join projects as p on c.date =date( from_unixtime(p.created_at ))
+ group by c.year,
+ c.Quarter,
+ C.month_name 
+ order by year_ desc , quarter_, Month_ ;
 
+# -- Total Number of Projects By Year
 SELECT 
     YEAR(from_unixtime(created_at)) AS year,
     COUNT(*) AS total_projects
@@ -51,8 +63,7 @@ FROM  projects
 GROUP BY 1
 ORDER BY 1;
 
-
-# Total Number of Projects By Amount Raised-
+#--Total Number of Successful Projects By Amount Raised
 
 SELECT 
     name AS project_name,
@@ -64,13 +75,13 @@ WHERE
     state = 'successful'
     order by amount_raised desc;
     
-  # total amount raised by Successful projects
+  # --total amount raised by Successful projects
   
     select  state ,sum(goal_usd) as Total_amount_ from projects where 
     state = 'successful'
      group by state ;
      
-# to see total amount raised by Successful projects in Billions
+# --to see total amount raised by Successful projects in Billions
 
    select  concat( round(sum(goal_usd)/1000000000,2),'B') as Total_amount_in_billions from projects where 
     state = 'successful';
@@ -84,7 +95,7 @@ backers_count from projects
 where state = 'successful' 
 order by backers_count desc;
 
-# top 10 of Successful Projects By Backers
+# top 10 of Successful Projects By Backers usinh window_function
 
 select project_name,
 state,
@@ -99,7 +110,7 @@ where state = 'successful'
 )ranked where rank_1 <=10 ;
 
 
-# top 10 of Successful Projects By Backers
+# top 10 of Successful Projects By Backers using limit
 
 select name as project_name,
 state,
@@ -116,9 +127,7 @@ WHERE
     state = 'successful'
     and successful_at is not null
     and created_at is not null
-    group by state
-ORDER BY 
-   avg_days_for_project DESC;
+    group by state;
 
  #-------------- Percentage of Successful Projects Overall ----------------------#
 
